@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+// ReSharper disable FunctionNeverReturns
 
 namespace Task2.Library
 {
@@ -18,6 +19,11 @@ namespace Task2.Library
                 curr += prev;
                 prev -= curr;
             }
+        }
+
+        public IEnumerable<int> GetNFibonacciNumbers(int n)
+        {
+            return GetFibonacciNumber().Take(n);
         }
     }
 }
