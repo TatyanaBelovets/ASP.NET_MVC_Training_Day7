@@ -9,9 +9,9 @@ namespace Task4.Library
 {
     public static class GenericsBinarySearch
     {
-        public static int BinarySearch<T>(T[] array, T key, IComparer<T> comparer)
+        public static int BinarySearch<T>(T[] array, T key)
         {
-            return BinarySearch(array, key, 0, array.Length, comparer);
+            return BinarySearch(array, key, 0, array.Length, Comparer<T>.Default);
         }
 
         public static int BinarySearch<T>(T[] array, T key, int left, int right, IComparer<T> comparer)

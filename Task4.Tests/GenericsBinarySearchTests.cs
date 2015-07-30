@@ -13,7 +13,7 @@ namespace Task4.Tests
         {
             var array = new[] {0, 1, 3, 5, 12, 24};
             var expectedValue = 1;
-            var result = GenericsBinarySearch.BinarySearch(array, 1, Comparer<Int32>.Default);
+            var result = GenericsBinarySearch.BinarySearch(array, 1);
             Assert.AreEqual(expectedValue, result);
         }
 
@@ -22,7 +22,7 @@ namespace Task4.Tests
         {
             var array = new[] {0, 1, 3, 5, 12, 24};
             var expectedValue = 0;
-            var result = GenericsBinarySearch.BinarySearch(array, 0, Comparer<Int32>.Default);
+            var result = GenericsBinarySearch.BinarySearch(array, 0);
             Assert.AreEqual(expectedValue, result);
         }
 
@@ -31,7 +31,7 @@ namespace Task4.Tests
         {
             var array = new[] {0, 1, 3, 5, 12, 24, 38};
             var expectedValue = array.Length - 1;
-            var result = GenericsBinarySearch.BinarySearch(array, 38, Comparer<Int32>.Default);
+            var result = GenericsBinarySearch.BinarySearch(array, 38);
             Assert.AreEqual(expectedValue, result);
         }
 
@@ -40,7 +40,7 @@ namespace Task4.Tests
         {
             var array = new[] {0, 1, 3, 5, 12, 24, 38};
             var expectedValue = -1;
-            var result = GenericsBinarySearch.BinarySearch(array, 17, Comparer<Int32>.Default);
+            var result = GenericsBinarySearch.BinarySearch(array, 17);
             Assert.AreEqual(expectedValue, result);
         }
 
@@ -49,7 +49,7 @@ namespace Task4.Tests
         {
             var array = new[] {1, 2};
             var expectedValue = 0;
-            var result = GenericsBinarySearch.BinarySearch(array, 1, Comparer<Int32>.Default);
+            var result = GenericsBinarySearch.BinarySearch(array, 1);
             Assert.AreEqual(expectedValue, result);
         }
 
@@ -58,7 +58,7 @@ namespace Task4.Tests
         {
             var array = new[] {1};
             var expectedValue = 0;
-            var result = GenericsBinarySearch.BinarySearch(array, 1, Comparer<Int32>.Default);
+            var result = GenericsBinarySearch.BinarySearch(array, 1);
             Assert.AreEqual(expectedValue, result);
         }
 
@@ -67,7 +67,7 @@ namespace Task4.Tests
         {
             var array = new[] {1, 2};
             var expectedValue = 1;
-            var result = GenericsBinarySearch.BinarySearch(array, 2, Comparer<Int32>.Default);
+            var result = GenericsBinarySearch.BinarySearch(array, 2);
             Assert.AreEqual(expectedValue, result);
         }
 
@@ -76,7 +76,7 @@ namespace Task4.Tests
         {
             var array = new[] {1, 2};
             var expectedValue = -1;
-            var result = GenericsBinarySearch.BinarySearch(array, 10, Comparer<Int32>.Default);
+            var result = GenericsBinarySearch.BinarySearch(array, 10);
             Assert.AreEqual(expectedValue, result);
         }
 
@@ -84,7 +84,7 @@ namespace Task4.Tests
         public void BinarySearch_GivenEmptyArrayAndValue_ThrowsArgumentException()
         {
             var array = new int[] {};
-            GenericsBinarySearch.BinarySearch(array, 38, Comparer<Int32>.Default);
+            GenericsBinarySearch.BinarySearch(array, 38);
         }
 
         [TestMethod]
@@ -92,7 +92,7 @@ namespace Task4.Tests
         {
             var array = new[] { "", "a", "aa", "ab", "abb", "ad", "d" };
             var expectedValue = 0;
-            var result = GenericsBinarySearch.BinarySearch(array, "", Comparer<String>.Default);
+            var result = GenericsBinarySearch.BinarySearch(array, "");
             Assert.AreEqual(expectedValue, result);
         }
 
