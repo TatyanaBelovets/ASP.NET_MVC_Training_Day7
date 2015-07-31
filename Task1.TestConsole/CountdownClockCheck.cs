@@ -5,7 +5,7 @@ namespace Task1.TestConsole
 {
     class CountdownClockCheck
     {
-        static void Main(string[] args)
+        static void Main()
         {
             var clock = new CountdownClock();
             var bath = new Bathroom();

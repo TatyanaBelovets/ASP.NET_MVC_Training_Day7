@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 // ReSharper disable FunctionNeverReturns
 
 namespace Task2.Library
@@ -23,7 +21,11 @@ namespace Task2.Library
 
         public IEnumerable<int> GetNFibonacciNumbers(int n)
         {
-            return GetFibonacciNumber().Take(n);
+            if (n > 0)
+            {
+                return GetFibonacciNumber().Take(n);
+            }
+            throw new ArgumentException("Argument can't be negative", "n");
         }
     }
 }

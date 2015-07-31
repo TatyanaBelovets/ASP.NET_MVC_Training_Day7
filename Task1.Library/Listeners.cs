@@ -4,9 +4,9 @@ namespace Task1.Library
 {
     public class Microwave
     {
-        private static void MicrowaveMsg()
+        private static void MicrowaveMsg(object sender, int seconds)
         {
-            Console.WriteLine("Your breakfast is ready!");
+            Console.WriteLine("Your breakfast was warmed in {0} seconds!", seconds);
         }
 
         public void Unregister(CountdownClock clock)
@@ -22,9 +22,9 @@ namespace Task1.Library
 
     public class Bathroom
     {
-        private static void BathroomMsg()
+        private static void BathroomMsg(object sender, int seconds)
         {
-            Console.WriteLine("Bathroom is ready for using!");
+            Console.WriteLine("Bathroom was prepared for using in {0} seconds!", seconds);
         }
 
         public void Unregister(CountdownClock clock)

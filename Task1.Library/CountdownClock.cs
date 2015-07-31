@@ -5,15 +5,12 @@ namespace Task1.Library
 {
     public class CountdownClock
     {
-        public delegate void TimeUpEventHandler();
-
-        public event TimeUpEventHandler TimeUp;
+        public event EventHandler<int> TimeUp = delegate { };
 
         public void ImitationCountdownClock(int seconds)
         {
             Thread.Sleep(seconds * 1000);
-            Console.WriteLine("Time is up!");
-            if (TimeUp != null) TimeUp();
+            if (TimeUp != null) TimeUp(this, seconds);
         }
     }
 
