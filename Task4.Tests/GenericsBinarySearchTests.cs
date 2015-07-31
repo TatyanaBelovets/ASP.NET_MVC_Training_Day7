@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Task4.Library;
+// ReSharper disable ConvertToConstant.Local
 
 namespace Task4.Tests
 {
