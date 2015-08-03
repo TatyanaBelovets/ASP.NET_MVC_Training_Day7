@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+#pragma warning disable 693
 
 /*Разработать (на основе одномерного массива) обобщенную класс-коллекцию CustomQueue, 
  * реализующую основные операции в виде методов Enqueue(), Dequeue(), Peek(), а также 
@@ -10,45 +12,63 @@ using System.Threading.Tasks;
  * Протестировать методы разработанного класса.*/
 namespace Task3.Library
 {
-    public class CustomQueue<T>
+    public class CustomQueue<T> : IEnumerable<T>
     {
+        private const int StartLength = 10;
         private T[] _queue;
         private int _start;
         private int _end;
-        public int ElementsCount { get; private set; }
+        public int ElementsCount{ get { return _end - _start; } }
 
-        CustomQueue()
+        public CustomQueue()
         {
-            _queue = new T[10];
+            _queue = new T[StartLength];
             _start = 0;
             _end = 0;
-            ElementsCount = 0;
         }
-        CustomQueue(int length)
+
+        public CustomQueue(T[] array) : this()
         {
-            if (length < 0)
+            if (array.Length > 0)
             {
-                throw new ArgumentException("Size of queue can't be negative number!", "length");
+                _queue = array;
+                _end = array.Length;
             }
-            _queue = new T[length];
-            _start = 0;
-            _end = 0;
-            ElementsCount = 0;
+        }
+
+        public CustomQueue(IEnumerable<T> collection) : this(collection.ToArray())
+        {
         }
 
         public void Enqueue(T elem) // добавить элемент в очередь
         {
+            if (_end >= _queue.Length)
+            {
+                if (_start != 0)
+                {
+                    MoveToZero();
+                }
+                else
+                {
+                    var temp = _queue;
+                    _queue = new T[ElementsCount*2];
+                    Array.Copy(temp, _start, _queue, 0, ElementsCount);
+                }
+            }
             _queue[_end] = elem;
             _end += 1;
-            ElementsCount += 1;
+            
         }
         
         public T Dequeue()// удалить элемент из очереди
         {
             if (ElementsCount > 0)
-            {
-                _start += 1;
-                ElementsCount -= 1;
+            {     
+                if (_start > _queue.Length/4)
+                {
+                    MoveToZero();
+                }
+                ++_start;
                 return _queue[_start - 1];
             }
             throw new InvalidOperationException("Empty queue!");
@@ -63,9 +83,90 @@ namespace Task3.Library
             throw new InvalidOperationException("Empty queue!");
         }
 
-        public override string ToString()
+        public IEnumerator<T> GetEnumerator()
         {
-            return _queue.ToString();
+            return new CustomIterator<T>(this);
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            throw new NotImplementedException();
+        } 
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null) return false;
+            if (this == obj) return true;
+            var p = obj as CustomQueue<T>;
+            if (p == null)
+            {
+                return false;
+            }
+            if (ElementsCount != p.ElementsCount) return false;
+            for (int i = _start, j = p._start; i < _end; i++, j++)
+            {
+                if (!Equals(_queue[i], p._queue[j]))
+                {
+                    return false;
+                }
+
+            }
+            return true;
+        }
+
+        public override int GetHashCode() //simple implementation for Equals
+        {
+            return _queue.GetHashCode();
+        }
+
+        private void MoveToZero()
+        {
+            Array.Copy(_queue, _start, _queue, 0, ElementsCount);
+            _end = _end - _start;
+            _start = 0;
+        }
+
+        private class CustomIterator<T> : IEnumerator<T>
+        {
+            private readonly CustomQueue<T> _currentQueue; 
+            private int _currentIndex;
+
+            public CustomIterator(CustomQueue<T> queue)
+            {
+                _currentQueue = queue;
+                _currentIndex = queue._start - 1;
+            } 
+            public void Dispose(){}
+
+            public bool MoveNext()
+            {
+                _currentIndex++;
+                return _currentIndex < _currentQueue._end;
+            }
+
+            public void Reset()
+            {
+                _currentIndex = _currentQueue._start - 1;
+            }
+
+            public T Current
+            {
+                get
+                {
+                    if (_currentIndex == -1 || _currentIndex == _currentQueue._end)
+                    {
+                        throw new InvalidOperationException();
+                    }
+                    return _currentQueue._queue[_currentIndex];
+                }
+            }
+
+            object IEnumerator.Current
+            {
+                get { return Current; }
+            }
         }
     }
+
+    
 }
