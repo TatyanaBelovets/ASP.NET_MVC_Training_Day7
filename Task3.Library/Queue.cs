@@ -66,7 +66,9 @@ namespace Task3.Library
                     MoveToZero();
                 }
                 ++_start;
-                return _queue[_start - 1];
+                var elem = _queue[_start - 1];
+                _queue[_start - 1] = default(T);
+                return elem;
             }
             throw new InvalidOperationException("Empty queue!");
         }
@@ -119,6 +121,10 @@ namespace Task3.Library
         private void MoveToZero()
         {
             Array.Copy(_queue, _start, _queue, 0, ElementsCount);
+            for (int i = _end - _start; i < _end; i++)
+            {
+                _queue[i] = default(T);
+            }
             _end = _end - _start;
             _start = 0;
         }
