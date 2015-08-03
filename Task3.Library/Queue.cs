@@ -6,10 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 #pragma warning disable 693
 
-/*Разработать (на основе одномерного массива) обобщенную класс-коллекцию CustomQueue, 
- * реализующую основные операции в виде методов Enqueue(), Dequeue(), Peek(), а также 
- * предоставляющую возможность итерирования по ней, реализовав ее итератор как внутренний класс. 
- * Протестировать методы разработанного класса.*/
+
 namespace Task3.Library
 {
     public class CustomQueue<T> : IEnumerable<T>
@@ -167,6 +164,4 @@ namespace Task3.Library
             }
         }
     }
-
-    
 }
