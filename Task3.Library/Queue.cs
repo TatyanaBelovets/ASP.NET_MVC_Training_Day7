@@ -87,7 +87,7 @@ namespace Task3.Library
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            return new CustomIterator<T>(this);
         } 
 
         public override bool Equals(object obj)
